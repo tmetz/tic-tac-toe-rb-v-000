@@ -103,6 +103,7 @@ def valid_move?(board, index)
 end
 
 def turn(board)
+  display_board(board)
   puts "Please enter 1-9:"
   input = gets.strip
   index = input_to_index(input)
@@ -116,7 +117,14 @@ end
 
 # Define your play method below
 def play(board)
-  9.times do
+  until over? do
     turn(board)
+    if over?
+      if draw?(board)
+        puts "Cat's Game!"
+      elsif won?(board)
+        puts "Congratulations #{winner(board)}!"
+      end
+    end
   end
 end
